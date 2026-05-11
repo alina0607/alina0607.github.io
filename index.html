@@ -386,5 +386,15 @@
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll('.project-card').forEach(card => {
+    const dest = card.querySelector('h3 a');
+    if (!dest) return;
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a, button')) return;
+      window.location.href = dest.href;
+    });
+  });
+</script>
 </body>
 </html>
