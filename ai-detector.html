@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Image Detector — Alina Chuang</title>
+  <meta name="description" content="Binary classifier for real vs AI-generated images. MLP from scratch in NumPy, CNN in PyTorch. 96.47% test accuracy on CIFAKE.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Alina Chuang</a>
+    <ul class="nav-links">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Project Hero ─────────────────────────────────── -->
+<section class="proj-hero">
+  <div class="container">
+    <a href="index.html#projects" class="back-link">← Back to Projects</a>
+
+    <div class="card-tags" style="margin-bottom: 14px;">
+      <span class="tag tag-ml">Deep Learning</span>
+      <span class="tag tag-ml">Computer Vision</span>
+      <span class="tag tag-ml">PyTorch</span>
+      <span class="tag tag-ml">NumPy</span>
+    </div>
+
+    <h1>AI Image Detector — From Scratch</h1>
+
+    <div class="proj-meta">
+      <span style="font-size: .8rem; color: var(--text-muted); font-family: var(--mono);">Python · NumPy · PyTorch</span>
+      <span style="font-size: .8rem; color: var(--text-muted);">·</span>
+      <span style="font-size: .8rem; color: var(--text-muted);">CIFAKE dataset · 100K images</span>
+    </div>
+
+    <div class="proj-links">
+      <a href="https://github.com/alina0607/ai-image-detector-from-scratch" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Body ─────────────────────────────────────────── -->
+<div class="proj-body">
+  <div class="container">
+    <div class="proj-grid">
+
+      <!-- Main content -->
+      <article class="prose">
+
+        <h2>Overview</h2>
+        <p>
+          As AI-generated images become increasingly photorealistic, detecting synthetic content
+          is a growing challenge in computer vision. This project explores how different neural
+          network architectures — from a hand-built MLP to a convolutional network — perform on
+          the same binary classification task: is this image <strong>real</strong> or
+          <strong>AI-generated</strong>?
+        </p>
+        <p>
+          The project takes two approaches. First, an MLP implemented entirely from scratch in
+          NumPy to understand the underlying mechanics. Second, a CNN in PyTorch to demonstrate
+          real-world performance and compare against the baseline.
+        </p>
+
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">96.47%</div>
+            <div class="lbl">Best Test Accuracy</div>
+          </div>
+          <div class="result-box">
+            <div class="val">100K</div>
+            <div class="lbl">Training Images</div>
+          </div>
+          <div class="result-box">
+            <div class="val">0.76%</div>
+            <div class="lbl">Train/Test Gap</div>
+          </div>
+          <div class="result-box">
+            <div class="val">50ep</div>
+            <div class="lbl">Final Model</div>
+          </div>
+        </div>
+
+        <h2>Approach 1 — MLP from Scratch (NumPy)</h2>
+        <p>
+          Built without any deep learning framework. Every component is implemented manually:
+          parameter initialisation (He scaling), forward propagation, cost computation
+          (Binary Cross-Entropy), backpropagation, and gradient descent with learning rate decay.
+          Both full-batch and mini-batch variants were implemented.
+        </p>
+
+        <h3>2-Layer Network</h3>
+        <p>Architecture: <code style="font-family: var(--mono); font-size: .85em; color: var(--accent);">LINEAR → ReLU → LINEAR → Sigmoid</code></p>
+        <ul>
+          <li>Full-batch (7000 epochs): <strong>75.44%</strong> test accuracy</li>
+          <li>Mini-batch (100 epochs): <strong>78.40%</strong> test accuracy</li>
+        </ul>
+
+        <h3>4-Layer Network</h3>
+        <p>Architecture: <code style="font-family: var(--mono); font-size: .85em; color: var(--accent);">[LINEAR → ReLU] × 3 → LINEAR → Sigmoid</code></p>
+        <ul>
+          <li>Full-batch (7000 epochs): <strong>76.44%</strong> test accuracy</li>
+          <li>Mini-batch (100 epochs): <strong>81.94%</strong> test accuracy</li>
+        </ul>
+
+        <div class="code-block">// He initialisation (NumPy)
+W = np.random.randn(n_out, n_in) * np.sqrt(2.0 / n_in)
+b = np.zeros((n_out, 1))
+
+// Mini-batch gradient descent with decay
+lr = lr_0 / (1 + decay_rate * epoch)</div>
+
+        <h2>Approach 2 — CNN (PyTorch)</h2>
+        <p>
+          Three progressively improved CNN versions, each addressing overfitting from the previous.
+        </p>
+
+        <h3>Baseline CNN</h3>
+        <div class="code-block">Input (3, 32, 32)
+  → Conv1 (32 filters, 3×3) → ReLU → MaxPool(2×2)   # (32, 16, 16)
+  → Conv2 (64 filters, 3×3) → ReLU → MaxPool(2×2)   # (64,  8,  8)
+  → Flatten                                            # (4096,)
+  → FC1 (4096 → 512)        → ReLU
+  → FC2 (512  → 1)          → Sigmoid</div>
+        <p>Train: 99.39% / Test: 95.08% / Gap: <strong>4.31%</strong></p>
+
+        <h3>CNN + Dropout</h3>
+        <p>
+          Dropout(0.5) inserted after FC1's ReLU, randomly zeroing 50% of neurons per batch
+          to reduce memorisation.
+        </p>
+        <p>Train: 99.89% / Test: 95.91% / Gap: <strong>3.98%</strong></p>
+
+        <h3>CNNv3 — Augmentation + BatchNorm + Dropout (Best)</h3>
+        <p>Three regularisation techniques combined:</p>
+
+        <table class="compare-table">
+          <thead>
+            <tr><th>Technique</th><th>Where Applied</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Data Augmentation</strong></td>
+              <td>Training loader</td>
+              <td>RandomHorizontalFlip + RandomCrop — prevents memorising fixed orientations</td>
+            </tr>
+            <tr>
+              <td><strong>Batch Normalisation</strong></td>
+              <td>After Conv1 and Conv2</td>
+              <td>Normalises activations per batch, stabilises training</td>
+            </tr>
+            <tr>
+              <td><strong>Dropout(0.5)</strong></td>
+              <td>After FC1 ReLU</td>
+              <td>Forces distributed representations in FC layers</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">Input (3, 32, 32)
+  → Conv1 → BatchNorm → ReLU → MaxPool   # (32, 16, 16)
+  → Conv2 → BatchNorm → ReLU → MaxPool   # (64,  8,  8)
+  → Flatten                               # (4096,)
+  → FC1 (4096 → 512) → ReLU → Dropout(0.5)
+  → FC2 (512 → 1)    → Sigmoid
+
+Trained for 50 epochs (augmentation requires more epochs to converge)
+Train: 97.22% / Test: 96.47% / Gap: 0.76%</div>
+
+        <h2>Results Summary</h2>
+
+        <table class="compare-table">
+          <thead>
+            <tr><th>Model</th><th>Train</th><th>Test</th><th>Gap</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MLP 2-layer full-batch (7000ep)</td>
+              <td>75.75%</td>
+              <td>75.44%</td>
+              <td class="good">0.31%</td>
+            </tr>
+            <tr>
+              <td>MLP 4-layer full-batch (7000ep)</td>
+              <td>76.64%</td>
+              <td>76.44%</td>
+              <td class="good">0.20%</td>
+            </tr>
+            <tr>
+              <td>MLP 2-layer mini-batch (100ep)</td>
+              <td>80.56%</td>
+              <td>78.40%</td>
+              <td>2.16%</td>
+            </tr>
+            <tr>
+              <td>MLP 4-layer mini-batch (100ep)</td>
+              <td>86.82%</td>
+              <td>81.94%</td>
+              <td class="bad">4.88%</td>
+            </tr>
+            <tr>
+              <td>CNN baseline (10ep)</td>
+              <td>99.39%</td>
+              <td>95.08%</td>
+              <td class="bad">4.31%</td>
+            </tr>
+            <tr>
+              <td>CNN + Dropout (25ep)</td>
+              <td>99.89%</td>
+              <td>95.91%</td>
+              <td class="bad">3.98%</td>
+            </tr>
+            <tr>
+              <td><strong>CNNv3 + Aug + BN + Dropout (50ep)</strong></td>
+              <td><strong>97.22%</strong></td>
+              <td><strong>96.47%</strong></td>
+              <td class="good"><strong>0.76%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Key insight:</strong> CNN baseline surpassed the best MLP in just 10 epochs
+          without any tuning — the core reason being that MLP discards all spatial structure
+          by flattening the image, while CNN preserves it through convolutional filters.
+          The real challenge was closing the train/test gap, which required combining all three
+          regularisation techniques.
+        </div>
+
+        <h2>Dataset</h2>
+        <p>
+          <strong>CIFAKE: Real and AI-Generated Synthetic Images</strong> (Kaggle).
+          100,000 training images (50K real / 50K fake) and 20,000 test images at 32×32 RGB.
+          Real images sourced from CIFAR-10; fake images generated using Stable Diffusion v1.4.
+        </p>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="proj-sidebar">
+        <div class="sidebar-card">
+          <h4>Stack</h4>
+          <div class="sidebar-row">
+            <span>Python</span>
+            <span>NumPy</span>
+            <span>PyTorch</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Concepts</h4>
+          <div class="sidebar-row">
+            <span>Backpropagation</span>
+            <span>Gradient Descent</span>
+            <span>Convolutional Networks</span>
+            <span>Batch Normalisation</span>
+            <span>Dropout Regularisation</span>
+            <span>Data Augmentation</span>
+            <span>Binary Classification</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Dataset</h4>
+          <div class="sidebar-row">
+            <span>CIFAKE (Kaggle)</span>
+            <span>100K train · 20K test</span>
+            <span>32×32 RGB images</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Links</h4>
+          <div class="sidebar-row">
+            <a href="https://github.com/alina0607/ai-image-detector-from-scratch" target="_blank" rel="noopener">GitHub Repository ↗</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/alina0607" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:huiyu06078@gmail.com">Email</a>
+      </div>
+      <span class="footer-copy">Alina Chuang · Greater Seattle Area, WA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UE5 AI Traffic Navigation — Alina Chuang</title>
+  <meta name="description" content="100-vehicle AI traffic simulation in Unreal Engine 5. Grid Hash spatial indexing (400× speedup), A* binary min-heap, spline-based pursuit steering.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Alina Chuang</a>
+    <ul class="nav-links">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Project Hero ─────────────────────────────────── -->
+<section class="proj-hero">
+  <div class="container">
+    <a href="index.html#projects" class="back-link">← Back to Projects</a>
+
+    <a class="video-thumb" href="https://www.youtube.com/watch?v=XKZPfm5rRmM" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/XKZPfm5rRmM/maxresdefault.jpg" alt="UE5 AI Traffic Navigation demo">
+      <div class="video-thumb-play">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.55)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>
+      </div>
+    </a>
+
+    <div class="card-tags" style="margin-bottom: 14px;">
+      <span class="tag tag-sys">AI Systems</span>
+      <span class="tag tag-sys">Algorithm Optimisation</span>
+      <span class="tag tag-sys">C++</span>
+      <span class="tag tag-sys">Unreal Engine 5</span>
+    </div>
+
+    <h1>Spline-Based AI Traffic Navigation</h1>
+
+    <div class="proj-meta">
+      <span style="font-size: .8rem; color: var(--text-muted); font-family: var(--mono);">C++ · Unreal Engine 5</span>
+      <span style="font-size: .8rem; color: var(--text-muted);">·</span>
+      <span style="font-size: .8rem; color: var(--text-muted);">M.S. Thesis Project · DigiPen · 2025–2026</span>
+    </div>
+
+    <div class="proj-links">
+      <a href="https://github.com/alina0607/UE5-Cpp-DrivingAI" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.youtube.com/watch?v=XKZPfm5rRmM&t=1s" class="btn btn-outline btn-sm" target="_blank" rel="noopener">YouTube Demo ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Body ─────────────────────────────────────────── -->
+<div class="proj-body">
+  <div class="container">
+    <div class="proj-grid">
+
+      <!-- Main content -->
+      <article class="prose">
+
+        <h2>Overview</h2>
+        <p>
+          A scalable city traffic simulation in Unreal Engine 5 supporting 100+ concurrent
+          AI vehicles with smooth lane-change logic, dynamic spawning/despawning, and sub-frame
+          recovery behaviours. The system is organised into three layers executing at different
+          frequencies: graph construction (once at load), navigation (on demand), and motion
+          control (every tick).
+        </p>
+        <p>
+          The article accompanying this project walks through two performance-critical
+          optimisations — Grid Hash junction detection and A* min-heap pathfinding — and the
+          steering model that ties them together.
+        </p>
+
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">100+</div>
+            <div class="lbl">AI Vehicles</div>
+          </div>
+          <div class="result-box">
+            <div class="val">400×</div>
+            <div class="lbl">Junction Speedup</div>
+          </div>
+          <div class="result-box">
+            <div class="val">O(N)</div>
+            <div class="lbl">Detection Complexity</div>
+          </div>
+          <div class="result-box">
+            <div class="val">O(V+E)logV</div>
+            <div class="lbl">Pathfinding</div>
+          </div>
+        </div>
+
+        <h2>Optimisation 1 — Grid Hash Junction Detection</h2>
+        <p>
+          Before any vehicle can navigate, the system needs to know where roads intersect.
+          Two roads meet wherever their spline sample points are within a detection radius
+          of each other.
+        </p>
+
+        <h3>The Problem: Brute-Force O(R² × S²)</h3>
+        <p>
+          With R roads and S sample points per road, a naive implementation compares every
+          sample on road A against every sample on road B, for every road pair — four nested
+          loops. With R = 100 and S = 200, this is <strong>400,000,000 distance computations</strong>
+          at startup.
+        </p>
+
+        <div class="code-block">// Brute-force: O(R² × S²)
+for (int32 A = 0; A &lt; Roads; ++A)
+  for (int32 B = A+1; B &lt; Roads; ++B)
+    for (Sample& SA : Samples[A])
+      for (Sample& SB : Samples[B])
+        // compute distance(SA, SB)</div>
+
+        <h3>The Solution: Grid Hash O(N)</h3>
+        <p>
+          The optimised implementation divides the world into uniform cells of side length
+          <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">CellSize</code>.
+          Every sample is inserted into exactly one cell. To find nearby points, only the
+          27 cells in the 3×3×3 neighbourhood are searched — points in any other cell are
+          skipped with zero work.
+        </p>
+        <p>
+          The key property: K (average points per neighbouring cell) is <em>constant</em>.
+          It does not grow as more roads are added. Total work becomes O(N × K) ≈ <strong>O(N)</strong>.
+        </p>
+
+        <div class="code-block">// Insert sample into grid
+FIntVector Cell(
+  FMath::FloorToInt(S.Location.X / CellSize),
+  FMath::FloorToInt(S.Location.Y / CellSize),
+  FMath::FloorToInt(S.Location.Z / CellSize));
+Grid.FindOrAdd(Cell).Add(Idx);
+
+// Query only the 3×3×3 neighbourhood
+for (int32 DX = -1; DX &lt;= 1; ++DX)
+  for (int32 DY = -1; DY &lt;= 1; ++DY)
+    for (int32 DZ = -1; DZ &lt;= 1; ++DZ)
+      if (auto* List = Grid.Find({Cell.X+DX, Cell.Y+DY, Cell.Z+DZ}))
+        // compare pairs in *List only</div>
+
+        <table class="compare-table">
+          <thead>
+            <tr><th>Metric</th><th>Brute-Force</th><th>Grid Hash</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Time complexity</td>
+              <td class="bad">O(R² × S²)</td>
+              <td class="good">O(N × K) ≈ O(N)</td>
+            </tr>
+            <tr>
+              <td>Operations (R=100, S=200)</td>
+              <td class="bad">400,000,000</td>
+              <td class="good">~1,000,000</td>
+            </tr>
+            <tr>
+              <td>Relative speed</td>
+              <td class="bad">400× slower</td>
+              <td class="good">1× (baseline)</td>
+            </tr>
+            <tr>
+              <td>Scales with map size</td>
+              <td class="bad">Exponential blow-up</td>
+              <td class="good">Linear growth</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Optimisation 2 — A* Binary Min-Heap</h2>
+        <p>
+          Each vehicle runs A* to find a route to its destination. The heuristic is
+          Euclidean distance between node world positions.
+        </p>
+
+        <h3>Original: O(n²) Linear Scan</h3>
+        <p>
+          The original open set was a plain <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">TArray&lt;int32&gt;</code>.
+          Finding the lowest F-score required a full linear scan, and removing it required
+          <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">TArray::Remove</code>
+          — also O(n). Both repeat once per expanded node, making the total search <strong>O(n²)</strong>.
+        </p>
+
+        <h3>Optimised: O((V+E) log V) with Lazy Deletion</h3>
+        <p>
+          The replacement uses Unreal's built-in <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">HeapPush</code>
+          and <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">HeapPop</code>
+          on a <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">TArray&lt;TPair&lt;float,int32&gt;&gt;</code>.
+          Updating a node's score uses <em>lazy deletion</em>: push a new lower-score entry
+          and discard stale pops via a <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">TSet</code> ClosedSet check in O(1).
+        </p>
+
+        <div class="code-block">using FEntry = TPair&lt;float, int32&gt;;
+auto Pred = [](const FEntry& A, const FEntry& B) { return A.Key &lt; B.Key; };
+
+TArray&lt;FEntry&gt; OpenHeap;
+TSet&lt;int32&gt;    ClosedSet;
+TMap&lt;int32,float&gt; GScore;
+
+while (OpenHeap.Num() &gt; 0) {
+  FEntry Top;
+  OpenHeap.HeapPop(Top, Pred);        // O(log N)
+  if (ClosedSet.Contains(Top.Value))  // discard stale
+    continue;
+  ClosedSet.Add(Top.Value);
+
+  for (const auto& Edge : Edges) {
+    const float NewG = GScore[Cur] + Edge.Cost;
+    if (NewG &lt; GScore.FindRef(Nb)) {
+      GScore[Nb] = NewG;
+      OpenHeap.HeapPush({NewG + H(Nb,Goal), Nb}, Pred); // lazy push
+    }
+  }
+}</div>
+
+        <table class="compare-table">
+          <thead>
+            <tr><th>Operation</th><th>Original</th><th>Optimised</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Find min F-score</td><td class="bad">Linear scan O(n)</td><td class="good">HeapPop O(log n)</td></tr>
+            <tr><td>Remove processed node</td><td class="bad">TArray::Remove O(n)</td><td class="good">ClosedSet skip O(1)</td></tr>
+            <tr><td>Open set membership</td><td class="bad">TArray::Contains O(n)</td><td class="good">TSet::Contains O(1)</td></tr>
+            <tr><td>Score update</td><td>In-place write</td><td class="good">Lazy push, stale skip</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Pursuit Point Steering</h2>
+        <p>
+          Each tick the vehicle steers toward a look-ahead point on the path rather than the
+          nearest spline position. Look-ahead distance scales with speed:
+        </p>
+        <div class="code-block">AheadDist = max(CurrentSpeed × LookAheadTime, MinLookAheadDist)</div>
+        <p>
+          <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">GetPursuitPoint</code>
+          walks forward through the segment array, subtracting each segment's remaining length
+          from the budget until it's spent, then samples the spline at the exact position.
+          This handles cross-segment look-ahead seamlessly without gaps or jumps.
+        </p>
+
+        <h2>Turn Signal &amp; Direction Detection</h2>
+        <p>
+          When a new segment is added, <code style="font-family:var(--mono);color:var(--accent);font-size:.85em">ComputeTurnAtJunction</code>
+          classifies the upcoming junction using dot product and cross product:
+        </p>
+        <ul>
+          <li><strong>Dot product &gt; 0.866</strong> (cos 30°) → straight, no signal</li>
+          <li><strong>Dot product &lt; −0.866</strong> → U-turn</li>
+          <li><strong>Cross product Z &gt; 0</strong> → right turn (UE5 left-handed Z-up)</li>
+          <li><strong>Cross product Z &lt; 0</strong> → left turn</li>
+        </ul>
+        <p>
+          The result drives both the blinker activator and the Hermite arc radius scaler
+          for outer-lane junction smoothing.
+        </p>
+
+        <div class="callout">
+          <strong>The combination of Grid Hash startup analysis and binary heap per-query search
+          is what makes running 100 independent AI vehicles at once practical within a
+          real-time frame budget.</strong>
+        </div>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="proj-sidebar">
+        <div class="sidebar-card">
+          <h4>Stack</h4>
+          <div class="sidebar-row">
+            <span>C++</span>
+            <span>Unreal Engine 5</span>
+            <span>USplineComponent</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Key Algorithms</h4>
+          <div class="sidebar-row">
+            <span>Grid Hash Spatial Index</span>
+            <span>A* (Binary Min-Heap)</span>
+            <span>Lazy Deletion</span>
+            <span>Pursuit Point Steering</span>
+            <span>Hermite Curve Smoothing</span>
+            <span>Cross-Product Turn Classification</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Context</h4>
+          <div class="sidebar-row">
+            <span>M.S. Thesis Project</span>
+            <span>DigiPen Institute of Technology</span>
+            <span>2025 – 2026</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Links</h4>
+          <div class="sidebar-row">
+            <a href="https://github.com/alina0607/UE5-Cpp-DrivingAI" target="_blank" rel="noopener">GitHub Repository ↗</a>
+            <a href="https://www.youtube.com/watch?v=XKZPfm5rRmM&t=1s" target="_blank" rel="noopener" style="margin-top:6px; display:block;">YouTube Demo ↗</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/alina0607" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:huiyu06078@gmail.com">Email</a>
+      </div>
+      <span class="footer-copy">Alina Chuang · Greater Seattle Area, WA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alina Chuang — ML Engineer</title>
+  <meta name="description" content="ML Engineer and AI Systems developer. M.S. Computer Science at DigiPen. Deep learning, neural networks, and real-time AI simulation.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Alina Chuang</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">M.S. Computer Science · DigiPen Institute of Technology</p>
+        <h1 class="hero-name">Alina Chuang</h1>
+        <p class="hero-role">
+          ML Engineer<span class="dot">·</span>AI Systems
+        </p>
+        <p class="hero-bio">
+          Building intelligent systems — from real-time AI simulation to deep learning.
+          4 years in game AI &amp; multiplayer systems, now focused on machine learning
+          and neural networks. Currently pursuing an M.S. in CS with a focus on AI.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://github.com/alina0607" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="avatar.png" alt="Alina Chuang" class="hero-avatar">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Projects ─────────────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <p class="sec-label">Work</p>
+    <h2 class="sec-title">Projects</h2>
+
+    <div class="projects-grid">
+
+      <!-- 1. AI Image Detector -->
+      <article class="project-card featured">
+        <div class="card-thumb-placeholder">
+          <span>Deep Learning · Computer Vision</span>
+        </div>
+        <div class="card-top">
+          <div class="card-tags">
+            <span class="tag tag-ml">Deep Learning</span>
+            <span class="tag tag-ml">Computer Vision</span>
+            <span class="tag tag-ml">PyTorch</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/alina0607/ai-image-detector-from-scratch" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <h3><a href="ai-detector.html">AI Image Detector — From Scratch</a></h3>
+        <p>
+          Binary classifier distinguishing real from AI-generated images.
+          Built a full MLP from scratch in NumPy (forward pass, backprop, gradient descent),
+          then implemented CNN in PyTorch — reaching 96.47% test accuracy on the CIFAKE dataset.
+        </p>
+        <div class="card-stats">
+          <div>
+            <span class="stat-value">96.47%</span>
+            <span class="stat-label">Test Accuracy</span>
+          </div>
+          <div>
+            <span class="stat-value">100K</span>
+            <span class="stat-label">Train Images</span>
+          </div>
+          <div>
+            <span class="stat-value">2</span>
+            <span class="stat-label">Architectures</span>
+          </div>
+        </div>
+        <span class="card-stack">Python · NumPy · PyTorch</span>
+      </article>
+
+      <!-- 2. UE5 Traffic Navigation -->
+      <article class="project-card">
+        <a class="card-thumb" href="https://www.youtube.com/watch?v=XKZPfm5rRmM" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/XKZPfm5rRmM/maxresdefault.jpg" alt="UE5 AI Traffic Navigation demo">
+          <div class="card-thumb-play">
+            <svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="card-top">
+          <div class="card-tags">
+            <span class="tag tag-sys">AI Systems</span>
+            <span class="tag tag-sys">Algorithms</span>
+            <span class="tag tag-sys">C++</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/alina0607/UE5-Cpp-DrivingAI" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://www.youtube.com/watch?v=XKZPfm5rRmM&t=1s" class="icon-link" target="_blank" rel="noopener">Demo ↗</a>
+          </div>
+        </div>
+        <h3><a href="ue5-traffic.html">Spline-Based AI Traffic Navigation</a></h3>
+        <p>
+          M.S. thesis project — 100-vehicle city traffic simulation in Unreal Engine 5.
+          Replaced brute-force junction detection with a Grid Hash spatial index (400× speedup)
+          and upgraded A* to a binary min-heap, enabling real-time re-routing at scale.
+        </p>
+        <div class="card-stats">
+          <div>
+            <span class="stat-value">100+</span>
+            <span class="stat-label">AI Vehicles</span>
+          </div>
+          <div>
+            <span class="stat-value">400×</span>
+            <span class="stat-label">Speedup</span>
+          </div>
+          <div>
+            <span class="stat-value">O(N)</span>
+            <span class="stat-label">Detection</span>
+          </div>
+        </div>
+        <span class="card-stack">C++ · Unreal Engine 5</span>
+      </article>
+
+      <!-- 3. XR Architecture -->
+      <article class="project-card">
+        <a class="card-thumb" href="https://www.youtube.com/watch?v=fDr9hcmdUOU" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/fDr9hcmdUOU/hqdefault.jpg" alt="Multiplayer XR demo">
+          <div class="card-thumb-play">
+            <svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="card-top">
+          <div class="card-tags">
+            <span class="tag tag-game">Systems Design</span>
+            <span class="tag tag-game">Networking</span>
+            <span class="tag tag-game">Unity</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/alina0607/Multiplay-xr-architecture" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://alina0607.github.io/Multiplay-xr-architecture/xr_architecture_alina_chuang.html" class="icon-link" target="_blank" rel="noopener">Diagram ↗</a>
+          </div>
+        </div>
+        <h3><a href="xr-architecture.html">Multiplayer XR Architecture</a></h3>
+        <p>
+          Architectural documentation of a multiplayer XR system built with Unity and Photon Fusion.
+          47 classes across 5 system layers with an interactive class diagram covering
+          networking, full-body avatar sync, and hand-interaction contracts.
+        </p>
+        <div class="card-stats">
+          <div>
+            <span class="stat-value">47</span>
+            <span class="stat-label">Classes</span>
+          </div>
+          <div>
+            <span class="stat-value">5</span>
+            <span class="stat-label">Layers</span>
+          </div>
+          <div>
+            <span class="stat-value">4 yrs</span>
+            <span class="stat-label">Industry</span>
+          </div>
+        </div>
+        <span class="card-stack">Unity · C# · Photon Fusion</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── About ─────────────────────────────────────────── -->
+<section id="about" style="border-top: 1px solid var(--border-sub);">
+  <div class="container">
+    <p class="sec-label">Background</p>
+    <h2 class="sec-title">About</h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a software engineer transitioning from game AI systems to machine learning.
+          I spent 4 years building multiplayer VR gameplay at a professional level — writing
+          real-time networking, physics-driven interaction, and synchronization systems in Unity.
+        </p>
+        <p>
+          That background gave me a strong foundation in algorithms and systems thinking.
+          Now I'm applying it to ML: building neural networks from scratch, understanding
+          backpropagation and gradient descent at the implementation level, and exploring
+          deep learning architectures in PyTorch.
+        </p>
+        <p>
+          I'm currently pursuing an M.S. in Computer Science at DigiPen Institute of Technology
+          (focus: AI &amp; Computer Graphics), where I also serve as a Teaching Assistant for
+          both Data Structures and Calculus. My thesis work involves building a scalable
+          100-vehicle AI traffic simulation system in Unreal Engine 5.
+        </p>
+        <p>
+          I'm actively looking for ML / AI Engineer roles where I can contribute to model
+          development, applied deep learning, or AI systems work.
+          Authorized to work in the U.S. — no sponsorship required.
+        </p>
+      </div>
+
+      <div>
+        <div class="sidebar-card">
+          <h4>Currently</h4>
+          <div class="sidebar-row">
+            <strong>M.S. Computer Science</strong>
+            <span>DigiPen Institute of Technology</span>
+            <span style="color: var(--text-muted); font-size: .78rem;">Focus: AI · Computer Graphics</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Experience</h4>
+          <div class="sidebar-row">
+            <strong>TA — Data Structures</strong>
+            <span>DigiPen · 2026–Present</span>
+          </div>
+          <div class="sidebar-row" style="margin-top: 10px;">
+            <strong>TA — Calculus</strong>
+            <span>DigiPen · Jan 2026–Present</span>
+          </div>
+          <div class="sidebar-row" style="margin-top: 10px;">
+            <strong>VR Multiplayer Engineer</strong>
+            <span>2020–2024 · 4 years</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Contact</h4>
+          <div class="sidebar-row">
+            <a href="mailto:huiyu06078@gmail.com" style="color: var(--accent); font-size: .85rem;">huiyu06078@gmail.com</a>
+            <span>Greater Seattle Area, WA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Skills ─────────────────────────────────────────── -->
+<section id="skills" style="border-top: 1px solid var(--border-sub);">
+  <div class="container">
+    <p class="sec-label">Technical</p>
+    <h2 class="sec-title">Skills</h2>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Machine Learning</h4>
+        <ul class="skill-list">
+          <li>PyTorch</li>
+          <li>NumPy</li>
+          <li>CNNs / MLPs</li>
+          <li>Backpropagation</li>
+          <li>Regularisation (BN, Dropout)</li>
+          <li>Binary Cross-Entropy</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>C++</li>
+          <li>C#</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>AI &amp; Algorithms</h4>
+        <ul class="skill-list">
+          <li>A* (binary min-heap)</li>
+          <li>Grid Hash / Spatial Index</li>
+          <li>Behavior Trees</li>
+          <li>AI Navigation</li>
+          <li>Pursuit Steering</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Engines &amp; Frameworks</h4>
+        <ul class="skill-list">
+          <li>Unreal Engine 5 (C++)</li>
+          <li>Unity (C#)</li>
+          <li>Photon Fusion</li>
+          <li>XR Interaction Toolkit</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Graphics</h4>
+        <ul class="skill-list">
+          <li>OpenGL</li>
+          <li>Vulkan</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <ul class="skill-list">
+          <li>Git</li>
+          <li>Visual Studio</li>
+          <li>Jupyter Notebooks</li>
+          <li>Trello</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Education ─────────────────────────────────────── -->
+<section id="education" style="border-top: 1px solid var(--border-sub);">
+  <div class="container">
+    <p class="sec-label">Academic</p>
+    <h2 class="sec-title">Education</h2>
+
+    <div class="edu-list">
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">DigiPen Institute of Technology</div>
+          <div class="edu-degree">M.S. in Computer Science</div>
+          <div class="edu-detail">Focus: Artificial Intelligence · Computer Graphics</div>
+        </div>
+        <div class="edu-date">Sep 2026 – Aug 2027</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">DigiPen Institute of Technology</div>
+          <div class="edu-degree">B.S. in Computer Science in Real-Time Interactive Simulation</div>
+          <div class="edu-detail">GPA: 3.947 / 4.0</div>
+        </div>
+        <div class="edu-date">Sep 2025 – Apr 2026</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">Tamkang University</div>
+          <div class="edu-degree">Bachelor's degree, Computer Science</div>
+        </div>
+        <div class="edu-date">Sep 2016 – Jun 2020</div>
+      </div>
+    </div>
+
+    <p class="sec-label" style="margin-top: 40px;">Recognition</p>
+    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; color: var(--text);">Awards &amp; Honors</h3>
+    <div class="awards-grid">
+      <div class="award-item">
+        <div class="award-title">Dean's Honor List — Spring 2026</div>
+        <div class="award-detail">Issued by DigiPen Institute of Technology · Apr 2026</div>
+      </div>
+      <div class="award-item">
+        <div class="award-title">Dean's Honor List — Fall 2025</div>
+        <div class="award-detail">Issued by DigiPen Institute of Technology · Dec 2025</div>
+      </div>
+      <div class="award-item" style="grid-column: 1 / -1;">
+        <div class="award-title">Triangle Game Jam Award — Top Prize</div>
+        <div class="award-detail" style="margin-top: 6px; line-height: 1.6;">
+          Issued by Triangle Game Jam · Mar 2025<br>
+          Awarded for outstanding performance in the 2025 Triangle Game Jam, a collaborative game development competition across Duke, UNC, and NC State. Theme: "ACROSS DIMENSIONS." Our team earned the top award among multi-college teams.<br><br>
+          Served as the C++ programmer for <em>Whiskerhold</em>, a dungeon crawler where players survive through a castle's hallway to reach the end. Responsible for gameplay mechanics and performance in Unreal Engine 5.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/alina0607" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:huiyu06078@gmail.com">Email</a>
+      </div>
+      <span class="footer-copy">Alina Chuang · Greater Seattle Area, WA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
