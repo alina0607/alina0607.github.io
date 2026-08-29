@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alina Chuang — ML Engineer</title>
-  <meta name="description" content="ML Engineer and AI Systems developer. M.S. Computer Science at DigiPen. Deep learning, neural networks, and real-time AI simulation.">
+  <meta name="description" content="Machine Learning Engineer at Autar. M.S. Computer Science at DigiPen, researching large language models from scratch. Deep learning, neural networks, and applied AI systems.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Alina Chuang</a>
     <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -27,20 +28,21 @@
   <div class="container">
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="hero-eyebrow">M.S. Computer Science · DigiPen Institute of Technology</p>
+        <p class="hero-eyebrow">Machine Learning Engineer at Autar · M.S. Computer Science, DigiPen</p>
         <h1 class="hero-name">Alina Chuang</h1>
         <p class="hero-role">
           ML Engineer<span class="dot">·</span>AI Systems
         </p>
         <p class="hero-bio">
-          Building intelligent systems — from real-time AI simulation to deep learning.
-          4 years in game AI &amp; multiplayer systems, now focused on machine learning
-          and neural networks. Currently pursuing an M.S. in CS with a focus on AI.
+          I build deep learning systems that reason about code — models for code-quality
+          assessment, autonomous LLM-agent evaluation loops, and cross-language static
+          analysis in production. Previously 4 years in multiplayer VR and game AI.
+          Currently researching large language models from scratch in my M.S.
         </p>
         <div class="hero-ctas">
           <a href="#projects" class="btn btn-primary">View Projects</a>
           <a href="https://github.com/alina0607" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/alinachuang/" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
       <div class="hero-photo">
@@ -50,8 +52,70 @@
   </div>
 </section>
 
+<!-- ── Experience ───────────────────────────────────── -->
+<section id="experience" style="border-top: 1px solid var(--border-sub);">
+  <div class="container">
+    <p class="sec-label">Work</p>
+    <h2 class="sec-title">Experience</h2>
+
+    <div class="edu-list">
+
+      <div class="edu-item exp-item">
+        <div>
+          <div class="edu-school">Machine Learning Engineer — Autar</div>
+          <div class="edu-degree">Part-time · Bellevue, WA</div>
+          <ul class="exp-bullets">
+            <li>Designed a deep learning model for code-quality assessment over multi-release repository histories, using complexity-trajectory features and refactoring-detection labels to separate essential from accidental complexity</li>
+            <li>Built a multi-dimensional code-ownership attribution model separating context-holder, surrounding-code author, hotspot originator, and primary contributor, validated on production repositories</li>
+            <li>Scaled the static-analysis engine to 5 languages (Python, TypeScript, Go, C/C++), lowering source into a unified IR powering call-graph construction, dependency-cycle detection, and cross-language contract-drift analysis</li>
+            <li>Built a commit-mining pipeline classifying automated vs. human authorship and quantifying repeated-work cost to rank the most expensive recurring engineering patterns in a codebase</li>
+          </ul>
+        </div>
+        <div class="edu-date">Aug 2026 – Present</div>
+      </div>
+
+      <div class="edu-item exp-item">
+        <div>
+          <div class="edu-school">AI Engineer Intern — Autar</div>
+          <div class="edu-degree">Internship, Full-time · Bellevue, WA</div>
+          <ul class="exp-bullets">
+            <li>Built an autonomous LLM-agent loop that re-scans a reference corpus on every commit, adversarially labels each detection confirmed / false-positive / not-actionable, and gates automated repairs behind eval-replay regression tests</li>
+            <li>Converted verification verdicts into a supervised three-class training set, freezing model-ready feature vectors and content-addressed code snippets at label time to prevent label drift as the source tree evolves</li>
+            <li>Engineered the cross-version training-data pipeline: function identity tracking across releases, automated label generation (new / fixed / improved / regressed), and time-series feature extraction over release histories</li>
+            <li>Won the company's internal hackathon for deep learning research applied to the code-analysis platform</li>
+          </ul>
+        </div>
+        <div class="edu-date">May 2026 – Aug 2026</div>
+      </div>
+
+      <div class="edu-item exp-item">
+        <div>
+          <div class="edu-school">Student Teaching Assistant — DigiPen Institute of Technology</div>
+          <div class="edu-degree">Data Structures &amp; Calculus · Redmond, WA</div>
+          <ul class="exp-bullets">
+            <li>Led weekly problem-solving sessions and one-on-one instruction in Data Structures (trees, heaps, graphs, hash maps) and Calculus</li>
+          </ul>
+        </div>
+        <div class="edu-date">Jan 2026 – Present</div>
+      </div>
+
+      <div class="edu-item exp-item">
+        <div>
+          <div class="edu-school">Unity VR Multiplayer Engineer</div>
+          <ul class="exp-bullets">
+            <li>Developed VR multiplayer gameplay systems in Unity (C#) for 2+ VR projects, including real-time networking, player synchronization, and physics-driven hand-tracking interaction</li>
+            <li>Optimized networking and multiplayer behavior, reducing latency and stabilizing frame rate across concurrent VR sessions</li>
+          </ul>
+        </div>
+        <div class="edu-date">Mar 2020 – Feb 2024</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ── Projects ─────────────────────────────────────── -->
-<section id="projects">
+<section id="projects" style="border-top: 1px solid var(--border-sub);">
   <div class="container">
     <p class="sec-label">Work</p>
     <h2 class="sec-title">Projects</h2>
@@ -117,7 +181,7 @@
         </div>
         <h3><a href="ue5-traffic.html">Spline-Based AI Traffic Navigation</a></h3>
         <p>
-          M.S. thesis project — 100-vehicle city traffic simulation in Unreal Engine 5.
+          100-vehicle city traffic simulation in Unreal Engine 5.
           Replaced brute-force junction detection with a Grid Hash spatial index (400× speedup)
           and upgraded A* to a binary min-heap, enabling real-time re-routing at scale.
         </p>
@@ -193,25 +257,27 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I'm a software engineer transitioning from game AI systems to machine learning.
-          I spent 4 years building multiplayer VR gameplay at a professional level — writing
-          real-time networking, physics-driven interaction, and synchronization systems in Unity.
+          I'm a Machine Learning Engineer at Autar, where I build deep learning and
+          static-analysis systems that reason about code. My work spans a code-quality
+          model trained on how software evolves across releases, an autonomous LLM-agent
+          loop that adversarially verifies its own outputs and generates supervised
+          training labels, and a cross-language analysis engine covering five languages.
         </p>
         <p>
-          That background gave me a strong foundation in algorithms and systems thinking.
-          Now I'm applying it to ML: building neural networks from scratch, understanding
-          backpropagation and gradient descent at the implementation level, and exploring
-          deep learning architectures in PyTorch.
+          I came to ML from systems engineering. I spent 4 years building multiplayer VR
+          gameplay professionally — real-time networking, physics-driven interaction, and
+          synchronization in Unity — which gave me a strong foundation in algorithms and
+          systems thinking that I now apply to model and data-pipeline design.
         </p>
         <p>
-          I'm currently pursuing an M.S. in Computer Science at DigiPen Institute of Technology
-          (focus: AI &amp; Computer Graphics), where I also serve as a Teaching Assistant for
-          both Data Structures and Calculus. My thesis work involves building a scalable
-          100-vehicle AI traffic simulation system in Unreal Engine 5.
+          I'm pursuing an M.S. in Computer Science at DigiPen Institute of Technology, where
+          my research focus is building large language models from scratch — tokenization,
+          attention, transformer architecture, pretraining, and RLHF. I also serve as a
+          Teaching Assistant for Data Structures and Calculus.
         </p>
         <p>
-          I'm actively looking for ML / AI Engineer roles where I can contribute to model
-          development, applied deep learning, or AI systems work.
+          I'm open to ML / AI Engineer roles in model development, applied deep learning,
+          and AI systems work.
           Authorized to work in the U.S. — no sponsorship required.
         </p>
       </div>
@@ -220,19 +286,27 @@
         <div class="sidebar-card">
           <h4>Currently</h4>
           <div class="sidebar-row">
+            <strong>ML Engineer</strong>
+            <span>Autar · Aug 2026–Present</span>
+          </div>
+          <div class="sidebar-row" style="margin-top: 10px;">
             <strong>M.S. Computer Science</strong>
             <span>DigiPen Institute of Technology</span>
-            <span style="color: var(--text-muted); font-size: .78rem;">Focus: AI · Computer Graphics</span>
+            <span style="color: var(--text-muted); font-size: .78rem;">Research: Large Language Models</span>
           </div>
         </div>
         <div class="sidebar-card">
           <h4>Experience</h4>
           <div class="sidebar-row">
-            <strong>TA — Data Structures</strong>
-            <span>DigiPen · 2026–Present</span>
+            <strong>ML Engineer</strong>
+            <span>Autar · Aug 2026–Present</span>
           </div>
           <div class="sidebar-row" style="margin-top: 10px;">
-            <strong>TA — Calculus</strong>
+            <strong>AI Engineer Intern</strong>
+            <span>Autar · May–Aug 2026</span>
+          </div>
+          <div class="sidebar-row" style="margin-top: 10px;">
+            <strong>TA — Data Structures &amp; Calculus</strong>
             <span>DigiPen · Jan 2026–Present</span>
           </div>
           <div class="sidebar-row" style="margin-top: 10px;">
@@ -262,12 +336,23 @@
       <div class="skill-group">
         <h4>Machine Learning</h4>
         <ul class="skill-list">
-          <li>PyTorch</li>
-          <li>NumPy</li>
+          <li>Deep Learning</li>
+          <li>Neural Networks</li>
           <li>CNNs / MLPs</li>
+          <li>Transformers / LLMs</li>
           <li>Backpropagation</li>
           <li>Regularisation (BN, Dropout)</li>
-          <li>Binary Cross-Entropy</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>ML Engineering</h4>
+        <ul class="skill-list">
+          <li>Feature Engineering</li>
+          <li>Model Evaluation</li>
+          <li>Cross-Validation</li>
+          <li>Training-Data Pipelines</li>
+          <li>Supervised Labeling</li>
+          <li>LLM Agent Loops</li>
         </ul>
       </div>
       <div class="skill-group">
@@ -276,6 +361,8 @@
           <li>Python</li>
           <li>C++</li>
           <li>C#</li>
+          <li>Go</li>
+          <li>TypeScript</li>
         </ul>
       </div>
       <div class="skill-group">
@@ -283,9 +370,9 @@
         <ul class="skill-list">
           <li>A* (binary min-heap)</li>
           <li>Grid Hash / Spatial Index</li>
-          <li>Behavior Trees</li>
+          <li>Static Analysis / IR</li>
+          <li>Call &amp; Dependency Graphs</li>
           <li>AI Navigation</li>
-          <li>Pursuit Steering</li>
         </ul>
       </div>
       <div class="skill-group">
@@ -307,10 +394,12 @@
       <div class="skill-group">
         <h4>Tools</h4>
         <ul class="skill-list">
-          <li>Git</li>
-          <li>Visual Studio</li>
+          <li>PyTorch</li>
+          <li>NumPy</li>
           <li>Jupyter Notebooks</li>
-          <li>Trello</li>
+          <li>Git</li>
+          <li>Docker</li>
+          <li>CI/CD</li>
         </ul>
       </div>
     </div>
@@ -328,9 +417,9 @@
         <div>
           <div class="edu-school">DigiPen Institute of Technology</div>
           <div class="edu-degree">M.S. in Computer Science</div>
-          <div class="edu-detail">Focus: Artificial Intelligence · Computer Graphics</div>
+          <div class="edu-detail">Research Focus: Large Language Models — building an LLM from scratch</div>
         </div>
-        <div class="edu-date">Sep 2026 – Aug 2027</div>
+        <div class="edu-date">Sep 2026 – Present</div>
       </div>
       <div class="edu-item">
         <div>
@@ -338,7 +427,7 @@
           <div class="edu-degree">B.S. in Computer Science in Real-Time Interactive Simulation</div>
           <div class="edu-detail">GPA: 3.947 / 4.0</div>
         </div>
-        <div class="edu-date">Sep 2025 – Apr 2026</div>
+        <div class="edu-date">Sep 2025 – Aug 2026</div>
       </div>
       <div class="edu-item">
         <div>
@@ -378,7 +467,7 @@
     <div class="footer-inner">
       <div class="footer-links">
         <a href="https://github.com/alina0607" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/alina-chuang-a77608203/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/alinachuang/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:huiyu06078@gmail.com">Email</a>
       </div>
       <span class="footer-copy">Alina Chuang · Greater Seattle Area, WA</span>

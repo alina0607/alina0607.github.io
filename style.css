@@ -292,6 +292,17 @@ nav {
 .edu-detail  { font-size: .78rem; color: var(--text-muted); margin-top: 4px; font-family: var(--mono); }
 .edu-date    { font-size: .78rem; color: var(--text-muted); white-space: nowrap; font-family: var(--mono); flex-shrink: 0; }
 
+.exp-item { padding: 20px 22px; }
+.exp-bullets { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+.exp-bullets li {
+  font-size: .85rem; color: var(--text-sec); line-height: 1.6;
+  padding-left: 16px; position: relative;
+}
+.exp-bullets li::before {
+  content: '▸'; color: var(--accent); font-size: .65rem;
+  position: absolute; left: 0; top: .45em;
+}
+
 .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 10px; }
 .award-item {
   background: var(--bg-card); border: 1px solid var(--border);
