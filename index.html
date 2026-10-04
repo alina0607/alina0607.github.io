@@ -117,20 +117,102 @@
 <!-- ── Projects ─────────────────────────────────────── -->
 <section id="projects" style="border-top: 1px solid var(--border-sub);">
   <div class="container">
-    <p class="sec-label">Work</p>
+    <p class="sec-label">Portfolio</p>
     <h2 class="sec-title">Projects</h2>
 
     <div class="projects-grid">
 
-      <!-- 1. AI Image Detector -->
-      <article class="project-card featured">
-        <div class="card-thumb-placeholder">
-          <span>Deep Learning · Computer Vision</span>
+      <!-- 1. Sell Anything (flagship) -->
+      <article class="project-card flagship">
+        <a class="card-thumb" href="sell-anything.html">
+          <img src="images/sell-anything-round.gif" alt="A round of Sell Anything: draw a bicycle, confirm it, answer the buyers, sell" loading="lazy">
+        </a>
+        <div class="card-top">
+          <div class="card-tags">
+            <span class="tag tag-ml">LLM from Scratch</span>
+            <span class="tag tag-ml">CNN</span>
+            <span class="tag tag-sys">Game Engine</span>
+            <span class="tag tag-sys">C++</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/alina0607/sell-anything" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
         </div>
+        <h3><a href="sell-anything.html">Sell Anything</a></h3>
+        <p>
+          A game built end-to-end from scratch: draw anything, and a room of AI buyers negotiates for it.
+          A custom C++ engine with swappable OpenGL / DGL / headless backends, a 345-class sketch CNN,
+          and a 12.9M-parameter GPT trained from scratch (tokenizer, pre-training, fine-tuning) that
+          speaks and judges for every buyer, with a price engine as its guardrail.
+        </p>
+        <div class="card-stats">
+          <div>
+            <span class="stat-value">12.9M</span>
+            <span class="stat-label">GPT Parameters</span>
+          </div>
+          <div>
+            <span class="stat-value">345</span>
+            <span class="stat-label">Sketch Classes</span>
+          </div>
+          <div>
+            <span class="stat-value">3</span>
+            <span class="stat-label">Render Backends</span>
+          </div>
+        </div>
+        <span class="card-stack">C++20 · OpenGL · Python · PyTorch</span>
+      </article>
+
+      <!-- 2. Sketch Recognition -->
+      <article class="project-card">
+        <a class="card-thumb" href="sketch-recognition.html">
+          <img src="images/sketch-grid.png" alt="32 Quick, Draw! sketches from 32 categories" loading="lazy">
+        </a>
+        <div class="card-top">
+          <div class="card-tags">
+            <span class="tag tag-ml">Deep Learning</span>
+            <span class="tag tag-ml">CNN</span>
+            <span class="tag tag-ml">MLP</span>
+            <span class="tag tag-ml">Large-Scale Data</span>
+            <span class="tag tag-ml">PyTorch</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/alina0607/sketch-recognition-from-scratch" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <h3><a href="sketch-recognition.html">Sketch Recognition from Scratch</a></h3>
+        <p>
+          A VGG-style CNN trained from scratch on 1.7M Google Quick, Draw! drawings across all 345
+          categories: 71.7% top-1 and 87.1% top-3 on 172,500 held-out drawings. In progress: a
+          controlled MLP-vs-CNN study with matched parameter counts, pixel-shuffle and shift tests.
+        </p>
+        <div class="card-stats">
+          <div>
+            <span class="stat-value">1.7M</span>
+            <span class="stat-label">Train Drawings</span>
+          </div>
+          <div>
+            <span class="stat-value">345</span>
+            <span class="stat-label">Classes</span>
+          </div>
+          <div>
+            <span class="stat-value">87.1%</span>
+            <span class="stat-label">Top-3 Accuracy</span>
+          </div>
+        </div>
+        <span class="card-stack">Python · PyTorch · NumPy</span>
+      </article>
+
+      <!-- 3. AI Image Detector -->
+      <article class="project-card">
+        <a class="card-thumb" href="ai-detector.html">
+          <img src="images/ai-detector-results.png" alt="Test accuracy of four MLP and three CNN variants" loading="lazy">
+        </a>
         <div class="card-top">
           <div class="card-tags">
             <span class="tag tag-ml">Deep Learning</span>
             <span class="tag tag-ml">Computer Vision</span>
+            <span class="tag tag-ml">MLP</span>
+            <span class="tag tag-ml">CNN</span>
             <span class="tag tag-ml">PyTorch</span>
           </div>
           <div class="card-links">
@@ -160,7 +242,7 @@
         <span class="card-stack">Python · NumPy · PyTorch</span>
       </article>
 
-      <!-- 2. UE5 Traffic Navigation -->
+      <!-- 4. UE5 Traffic Navigation -->
       <article class="project-card">
         <a class="card-thumb" href="https://www.youtube.com/watch?v=XKZPfm5rRmM" target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/XKZPfm5rRmM/maxresdefault.jpg" alt="UE5 AI Traffic Navigation demo">
@@ -173,6 +255,7 @@
             <span class="tag tag-sys">AI Systems</span>
             <span class="tag tag-sys">Algorithms</span>
             <span class="tag tag-sys">C++</span>
+            <span class="tag tag-sys">Unreal Engine 5</span>
           </div>
           <div class="card-links">
             <a href="https://github.com/alina0607/UE5-Cpp-DrivingAI" class="icon-link" target="_blank" rel="noopener">GitHub ↗</a>
@@ -202,7 +285,7 @@
         <span class="card-stack">C++ · Unreal Engine 5</span>
       </article>
 
-      <!-- 3. XR Architecture -->
+      <!-- 5. XR Architecture -->
       <article class="project-card">
         <a class="card-thumb" href="https://www.youtube.com/watch?v=fDr9hcmdUOU" target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/fDr9hcmdUOU/hqdefault.jpg" alt="Multiplayer XR demo">

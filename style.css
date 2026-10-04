@@ -232,6 +232,26 @@ nav {
 .stat-label { font-size: .65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
 .card-stack { font-size: .72rem; font-family: var(--mono); color: var(--text-muted); }
 
+/* Flagship project: full row, image left and text right (desktop); the rest two per row */
+@media (min-width: 769px) {
+  .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-card.flagship {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    column-gap: 28px; row-gap: 14px; align-content: start;
+  }
+  .project-card.flagship > * { grid-column: 2; }
+  .project-card.flagship > .card-thumb {
+    grid-column: 1; grid-row: 1 / span 6;
+    margin: -24px 0 -24px -24px; aspect-ratio: auto;
+    border-radius: var(--r-lg) 0 0 var(--r-lg);
+  }
+  .project-card.flagship > p { flex-grow: 0; }
+  /* show the whole game frame; the game's own paper colour fills the rest */
+  .project-card.flagship > .card-thumb { background: #f5f2eb; }
+  .project-card.flagship > .card-thumb img { object-fit: contain; }
+}
+
 /* ── About ───────────────────────────────────────────── */
 .about-grid { display: grid; grid-template-columns: 1fr 260px; gap: 56px; align-items: start; }
 .about-text p { color: var(--text-sec); margin-bottom: 14px; line-height: 1.75; font-size: .9375rem; }
@@ -397,6 +417,13 @@ footer { border-top: 1px solid var(--border-sub); padding: 36px 0; }
                    letter-spacing: .06em; margin-top: 4px; }
 
 .proj-sidebar { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 72px; }
+
+/* Wide code and tables scroll inside their own box instead of widening the page on phones:
+   a grid item's min-content width would otherwise stretch the whole column */
+.proj-grid > * { min-width: 0; }
+@media (max-width: 768px) {
+  .compare-table { display: block; overflow-x: auto; }
+}
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 768px) {
