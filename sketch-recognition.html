@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sketch Recognition from Scratch — Alina Chuang</title>
   <meta name="description" content="A CNN that recognises free-hand sketches across all 345 Quick, Draw! categories, trained from scratch on 1.7M drawings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -85,6 +88,26 @@
             <div class="lbl">Train Drawings</div>
           </div>
         </div>
+
+        <h2>Upgrade of AI Image Detector</h2>
+        <p>
+          This project starts from the same building blocks as my earlier
+          <a href="ai-detector.html">AI Image Detector</a> (3×3 convolutions, BatchNorm, Dropout,
+          augmentation in PyTorch) and takes them to a larger, stricter and shipped setting.
+        </p>
+        <table class="compare-table">
+          <thead><tr><th></th><th>AI Image Detector</th><th>Sketch Recognition</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Data</strong></td><td>100K images, loaded from files</td><td class="good">1.7M drawings, downloaded by byte range and kept on the GPU</td></tr>
+            <tr><td><strong>Task</strong></td><td>2 classes (sigmoid)</td><td class="good">345 classes (softmax), top-1 and top-3</td></tr>
+            <tr><td><strong>Network</strong></td><td>2 conv layers</td><td class="good">5 conv layers in VGG-style blocks, BatchNorm in the head too</td></tr>
+            <tr><td><strong>Optimisation</strong></td><td>Adam, fixed learning rate</td><td class="good">SGD with Nesterov momentum, weight decay, one-cycle schedule</td></tr>
+            <tr><td><strong>Augmentation</strong></td><td>flip and crop on the CPU</td><td class="good">random rotation, shift and scale on the GPU</td></tr>
+            <tr><td><strong>Evaluation</strong></td><td>train / test</td><td class="good">stratified train / validation / test; test used once</td></tr>
+            <tr><td><strong>Training runs</strong></td><td>restart from scratch</td><td class="good">resumable, bit-for-bit identical to an uninterrupted run</td></tr>
+            <tr><td><strong>Deployment</strong></td><td>notebook</td><td class="good">live in a game, with player strokes preprocessed exactly like the dataset (0.996 correlation)</td></tr>
+          </tbody>
+        </table>
 
         <h2>Data at Scale</h2>
         <p>
@@ -183,5 +206,6 @@
   </div>
 </footer>
 
+<script src="glow.js" defer></script>
 </body>
 </html>

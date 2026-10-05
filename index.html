@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alina Chuang — ML Engineer</title>
   <meta name="description" content="Machine Learning Engineer at Autar. M.S. Computer Science at DigiPen, researching large language models from scratch. Deep learning, neural networks, and applied AI systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,6 +19,7 @@
     <ul class="nav-links">
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#recommendations">Recommendations</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
@@ -31,7 +35,7 @@
         <p class="hero-eyebrow">Machine Learning Engineer at Autar · M.S. Computer Science, DigiPen</p>
         <h1 class="hero-name">Alina Chuang</h1>
         <p class="hero-role">
-          ML Engineer<span class="dot">·</span>AI Systems
+          <span class="grad-text">ML Engineer</span><span class="dot">·</span><span class="grad-text">AI Systems</span>
         </p>
         <p class="hero-bio">
           I build deep learning systems that reason about code — models for code-quality
@@ -185,19 +189,12 @@
           categories: 71.7% top-1 and 87.1% top-3 on 172,500 held-out drawings. In progress: a
           controlled MLP-vs-CNN study with matched parameter counts, pixel-shuffle and shift tests.
         </p>
-        <div class="card-stats">
-          <div>
-            <span class="stat-value">1.7M</span>
-            <span class="stat-label">Train Drawings</span>
-          </div>
-          <div>
-            <span class="stat-value">345</span>
-            <span class="stat-label">Classes</span>
-          </div>
-          <div>
-            <span class="stat-value">87.1%</span>
-            <span class="stat-label">Top-3 Accuracy</span>
-          </div>
+        <div class="upgrade">
+          <div class="upgrade-head">Upgrade of <a href="ai-detector.html">AI Image Detector</a></div>
+          <div class="upgrade-row"><span class="u-label">Training images</span><span class="u-old">100K</span><span class="u-arrow">→</span><span class="u-new">1.7M</span><span class="u-chip">17×</span></div>
+          <div class="upgrade-row"><span class="u-label">Categories</span><span class="u-old">2</span><span class="u-arrow">→</span><span class="u-new">345</span><span class="u-chip">172×</span></div>
+          <div class="upgrade-row"><span class="u-label">Random-guess score</span><span class="u-old">50%</span><span class="u-arrow">→</span><span class="u-new">0.3%</span><span class="u-chip">harder</span></div>
+          <div class="upgrade-row"><span class="u-label">In a real product</span><span class="u-old">no</span><span class="u-arrow">→</span><span class="u-new">yes</span><span class="u-chip">shipped</span></div>
         </div>
         <span class="card-stack">Python · PyTorch · NumPy</span>
       </article>
@@ -328,6 +325,54 @@
       </article>
 
     </div>
+  </div>
+</section>
+
+<!-- ── Recommendations ──────────────────────────────── -->
+<section id="recommendations" style="border-top: 1px solid var(--border-sub);">
+  <div class="container">
+    <p class="sec-label">In their words</p>
+    <h2 class="sec-title">Recommendations</h2>
+
+    <div class="rec-grid">
+      <figure class="rec-card">
+        <blockquote>
+          <p class="rec-pull">Alina is a very capable ML engineer. She&#x27;s able to own features end-to-end, and consistently delivers on time.</p>
+          <p>Alina is a very capable ML engineer. She&#x27;s able to own features end-to-end, and consistently delivers on time. She has a focus on high-quality code and overall features, and independently comes up with innovative ideas for applying ML to solve a wide range of engineering problems. Her ability to effectively use agentic coding tools was well-demonstrated. Alina is also very easy to work and has been a great addition to our fast moving team.</p>
+        </blockquote>
+        <figcaption class="rec-by">
+          <span class="rec-avatar" aria-hidden="true">CJ</span>
+          <span><strong>Cherno Jagne</strong><span>Engineering Lead, Autar · Ex-Microsoft</span><span class="rec-rel">Managed Alina directly at Autar</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="rec-card">
+        <blockquote>
+          <p class="rec-pull">…she consistently impressed me with her intelligence, initiative, and ability to turn complex ideas into working software.</p>
+          <p>I had the pleasure of working with Alina at Autar, where she consistently impressed me with her intelligence, initiative, and ability to turn complex ideas into working software. She approaches unfamiliar problems with curiosity, learns quickly, and follows through with care and attention to detail.</p>
+          <p>Alina is also a thoughtful and dependable teammate. She welcomes feedback, and brings a positive, collaborative attitude to every project. Her combination of technical ability, creativity, and genuine drive to improve makes her an asset to any engineering team. I strongly recommend Alina and look forward to seeing what she builds next.</p>
+        </blockquote>
+        <figcaption class="rec-by">
+          <span class="rec-avatar" aria-hidden="true">ML</span>
+          <span><strong>Michael Langowski</strong><span>Head of Product, Autar · Ex-Microsoft (25 yrs)</span><span class="rec-rel">Managed Alina directly at Autar</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="rec-card">
+        <blockquote>
+          <p class="rec-pull">She consistently brought thoughtful technical insights to our discussions and offered constructive feedback that helped our team approach problems from different angles.</p>
+          <p>I had the pleasure of working with Alina this summer during our internship at a stealth startup. She is a creative and curious person who is always eager to learn and take on new challenges. One of the things that stood out to me was her openness to feedback and her willingness to consider different perspectives.</p>
+          <p>She consistently brought thoughtful technical insights to our discussions and offered constructive feedback that helped our team approach problems from different angles. She is also reliable and works well with others, often collaborating with the team to refine her ideas and develop stronger solutions.</p>
+          <p>I would highly recommend Alina to any team looking for someone who is technically capable, collaborative, and eager to grow.</p>
+        </blockquote>
+        <figcaption class="rec-by">
+          <span class="rec-avatar" aria-hidden="true">JO</span>
+          <span><strong>Justin Ortega</strong><span>Computer Science (Machine Learning) student</span><span class="rec-rel">Worked with Alina on the same team</span></span>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="rec-source">From LinkedIn ·
+      <a href="https://www.linkedin.com/in/alinachuang/details/recommendations/" target="_blank" rel="noopener">Read them on LinkedIn ↗</a></p>
   </div>
 </section>
 
@@ -568,5 +613,6 @@
     });
   });
 </script>
+<script src="glow.js" defer></script>
 </body>
 </html>
